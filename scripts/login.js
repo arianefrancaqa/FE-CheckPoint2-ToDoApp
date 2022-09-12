@@ -8,23 +8,22 @@ window.addEventListener("load", function () {
     let inputPassword = document.getElementById("inputPassword");
     let buttonSubmit = document.getElementById("submit");
 
-    function normalizarCampos(){
+    function normalizarCampos() {
         inputEmail = inputEmail.value.trim();
         inputPassword = inputPassword.value.trim();
+        console.log("Email: " + inputEmail)
     }
 
-    function checaCampos(){
-        checaCampos = true
-        return checaCampos
+    function validarEmail(email) {
+        let emailValue = /\S+@\S+\.\S+/;
+        return emailValue.test(email);
     }
 
     buttonSubmit.addEventListener("click", function (e) {
         normalizarCampos();
-        checaCampos();
-
-        if(campoOK){
-            window.location.href = "tarefas.html"
-        }
+        validarEmail(inputEmail.value);
+        
+        window.location.href = "tarefas.html";
         e.preventDefault();
     });
 })
