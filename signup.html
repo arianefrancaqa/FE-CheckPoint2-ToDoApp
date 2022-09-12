@@ -11,8 +11,9 @@
   <link rel="stylesheet" href="styles/acesso.css">
 
   <!-- ---------------------- lógica aplicada no registro -------------------- -->
-  <script src="/scripts/utils.js"></script>
+  <!-- <script src="/scripts/utils.js"></script>
   <script src="/scripts/signup.js"></script>
+  -->
 
 </head>
 
@@ -22,33 +23,33 @@
     <img src="./assets/pessoa-signup.png" alt="">
   </div>
   <div class="right">
-    <form>
+    <form name="myForm" onsubmit="return(validate())">
       <div class="form-header">
         <p>To-Do App</p>
       </div>
 
       <label>
         Nome:
-        <input type="text">
+        <input name="nome" type="text">
       </label>
       <label>
         Sobrenome:
-        <input type="text">
+        <input name="sobrenome" type="text">
       </label>
       <label>
         Email:
-        <input type="email">
+        <input name="email" id="inputEmail" type="email" type="text">
       </label>
       <label>
         Senha:
-        <input type="password">
+        <input name="senha" type="password">
       </label>
       <label>
         Repetir senha:
-        <input type="password">
+        <input name="repetirSenha" type="password">
       </label>
 
-      <button>Criar conta</button>
+      <button id="btn" type="submit" onclick="emailValidation()">Criar conta</button>
 
     </form>
     <div class="ingressar">
@@ -56,6 +57,7 @@
     </div>
   </div>
 
+  <script src="./scripts/signup.js"></script>
 </body>
 
 </html>
