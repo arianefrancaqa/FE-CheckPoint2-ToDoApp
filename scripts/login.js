@@ -21,10 +21,13 @@ window.addEventListener("load", function () {
 
     buttonSubmit.addEventListener("click", function (e) {
         normalizarCampos();
-        validarEmail(inputEmail.value);
-        
-        window.location.href = "tarefas.html";
-        e.preventDefault();
+        //Adicionar o "Se os dados existirem na base..."
+        if(validarEmail(inputEmail.value)){
+            window.location.href = "tarefas.html";
+            e.preventDefault();
+        } else{
+            console.log("Este email é inválido")
+        }
     });
 })
 
