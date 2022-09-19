@@ -15,15 +15,15 @@ https://www.simplilearn.com/tutorials/javascript-tutorial/email-validation-in-ja
 
 function validate() {
     const myForm = document.myForm
-    if (myForm.email.value == "") {
+    if (myForm.inputEmail.value == "") {
         alert("Forneça um endereço de email")
-        document.myForm.email.focus()
+        document.myForm.inputEmail.focus()
         return false
-    } else if(myForm.senha.value == ""){
+    } else if(myForm.inputPassword.value == ""){
         alert("Forneça a sua senha")  
-        document.myForm.senha.focus()
+        document.myForm.inputPassword.focus()
         return false
-    } else if (myForm.repetirSenha.value !== myForm.senha.value){
+    } else if (myForm.inputPasswordRepetir.value !== myForm.inputPassword.value){
         alert("Senhas não compatíveis")
         return false 
 
@@ -47,20 +47,35 @@ form = document.querySelector("form")
 form.addEventListener("submit", (evento) => {
     evento.preventDefault()
 
+    // Validar se todos os campos foram preenchidos
     document.getElementById("btn").disabled = true
-
-    let listOfInputs = document.querySelectorAll("input")
-    for (let index = 0; index < listOfInputs.length; index++) {
-        const input = listOfInputs[index];
-      if(input.value === null || input.value === "") {
-        document.getElementById("btn").disabled = true
-        alert(`Preencha todos os campos`) 
-        return 
-      }
-    }  
+    validate()
+    
+    // let listOfInputs = document.querySelectorAll("input")
+    // for (let index = 0; index < listOfInputs.length; index++) {
+    //     const input = listOfInputs[index];
+    //   if(input.value === null || input.value === "") {
+    //     document.getElementById("btn").disabled = true
+    //     alert(`Preencha todos os campos`) 
+    //     return 
+    //   }
+    // }  
     document.getElementById("btn").disabled = false
-    alert("Processo concluido")
-    return 
+
+    // Extrair valores dos campos
+    let nome = document.getElementById("inputNome").value;
+    let sobrenome = document.getElementById("inputSobrenome").value;
+    let email = document.getElementById("inputEmail").value;
+    let password = document.getElementById("inputPassword").value;
+    
+    console.log(email, password)
+    
+    // Chamar a API /users POST para criar um usuario
+    const jwt = signup(nome, sobrenome, email, password)
+    console.log(`jwt received: ${jwt}`);
+    // Redirecionar para a pagina de login
+    // window.location.href = "tarefas.html";
+    // return 
 })
 
 
@@ -73,8 +88,6 @@ function normalizarCampos(){
     return normalizarCampos;
 }
 
-
-
 /*
         let conteudo = input.value
         if (conteudo !== null && conteudo !== ''){
@@ -82,8 +95,6 @@ function normalizarCampos(){
         } else {
             document.getElementById("btn").disabled = true
         }
-
-
 
 let listOfInputs = document.querySelectorAll("input")
     for (let index = 0; index < listOfInputs.length; index++) {
@@ -94,3 +105,31 @@ let listOfInputs = document.querySelectorAll("input")
       
     }
          */
+function signup(nome, sobrenome, email, password) {
+    console.log(nome, sobrenome, email, password)
+    
+    const baseUrl = "https://ctd-todo-api.herokuapp.com";
+    let postBodyLogin = {
+        firstName: nome,
+        lastName: sobrenome,
+        email: email,
+        password: password
+    };
+      
+    fetch(`${baseUrl}/v1/users`, {
+        method: "POST",
+        body: JSON.stringify(postBodyLogin),
+        headers: { 
+            "Content-type": "application/json; charset=UTF-8" 
+        },
+    })
+    .then((response) => {
+        if (response.status === 201) {
+            return response.json()
+        }
+    })
+    .then((data) => {
+        return data.jwt
+    })
+    .catch((err) => console.log(err));
+}

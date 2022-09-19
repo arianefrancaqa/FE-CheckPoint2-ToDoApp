@@ -23,30 +23,30 @@
     <img src="./assets/pessoa-signup.png" alt="">
   </div>
   <div class="right">
-    <form name="myForm" onsubmit="return(validate())">
+    <form name="myForm"">
       <div class="form-header">
         <p>To-Do App</p>
       </div>
 
       <label>
         Nome:
-        <input name="nome" type="text">
+        <input name="inputNome" id="inputNome" type="text">
       </label>
       <label>
         Sobrenome:
-        <input name="sobrenome" type="text">
+        <input name="inputSobrenome" id="inputSobrenome" type="text">
       </label>
       <label>
         Email:
-        <input name="email" id="inputEmail" type="email" type="text">
+        <input name="inputEmail" id="inputEmail" type="email" type="text">
       </label>
       <label>
         Senha:
-        <input name="senha" type="password">
+        <input name="inputPassword" id="inputPassword" type="password">
       </label>
       <label>
         Repetir senha:
-        <input name="repetirSenha" type="password">
+        <input name="inputPasswordRepetir" id="inputPasswordRepetir" type="password">
       </label>
 
       <button id="btn" type="submit" onclick="emailValidation()">Criar conta</button>

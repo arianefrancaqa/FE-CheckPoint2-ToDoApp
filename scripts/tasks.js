@@ -1,9 +1,9 @@
-import { login, baseUrl } from "./login";
+import { login } from "./login.js";
 
 function getJwt() {
   let jwt = login(
-     "asasasas@mail.com",
-    "asaasd"
+     "denise@gmail.com",
+    "de123"
   );
   console.log("TESTE FILHA DA PUTA DO CARALHO");
   return console.log(jwt);
