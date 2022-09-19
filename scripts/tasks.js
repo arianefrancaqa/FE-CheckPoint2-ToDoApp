@@ -1,12 +1,15 @@
-import { login } from './login';
+import { login, baseUrl } from "./login";
 
-const baseUrl = "https://ctd-todo-api.herokuapp.com";
-let jwt = login({
-    emailEntry: "asasasas@mail.com",
-    passwordEntry: "asaasd"
-});
-console.log(jwt)
+function getJwt() {
+  let jwt = login(
+     "asasasas@mail.com",
+    "asaasd"
+  );
+  console.log("TESTE FILHA DA PUTA DO CARALHO");
+  return console.log(jwt);
+}
 
+getJwt();
 
 // Solicitação GET Tasks
 // fetch(`${baseUrl}/v1/tasks`)
@@ -15,33 +18,33 @@ console.log(jwt)
 //     .then((json) => console.log(json)) //imprimir dados no console
 //     .catch((err) => console.log("Erro de solicitação", err));
 
-//Envio POST Tasks
-let postTaskBody = {
-    description: "Terminar Checkpoint",
-    completed: "false",
-};
+// //Envio POST Tasks
+// let postTaskBody = {
+//     description: "Terminar Checkpoint",
+//     completed: "false",
+// };
 
-function postTask(body) {
-    fetch(`${baseUrl}/v1/tasks`, {
-        method: "POST",
-        body: JSON.stringify(postTaskBody),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            "authorization": jwt,
+// function postTask(body) {
+//     fetch(`${baseUrl}/v1/tasks`, {
+//         method: "POST",
+//         body: JSON.stringify(postTaskBody),
+//         headers: {
+//             "Content-type": "application/json; charset=UTF-8",
+//             "authorization": jwt,
 
-        },
-    })
-        .then((response) => {
-            if (response.status === 201) {
-                console.log("Successfull login");
-                return response.json()
-            }
-        })
-        .then((data) => {
-            console.log(data)
-            return data
-        })
-        .catch((err) => console.log(err));
-}
+//         },
+//     })
+//         .then((response) => {
+//             if (response.status === 201) {
+//                 console.log("Successfull login");
+//                 return response.json()
+//             }
+//         })
+//         .then((data) => {
+//             console.log(data)
+//             return data
+//         })
+//         .catch((err) => console.log(err));
+// }
 
 //postTask(postTaskBody);

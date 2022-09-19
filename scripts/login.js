@@ -13,7 +13,7 @@
 
 const baseUrl = "https://ctd-todo-api.herokuapp.com";
 
-function login({emailEntry, passwordEntry}){
+function login(emailEntry, passwordEntry){
     let postBodyLogin = {
         email: emailEntry,
         password: passwordEntry
@@ -51,7 +51,7 @@ window.addEventListener("load", function (event) {
   let buttonSubmit = document.getElementById("submit");
   let inputs = document.querySelectorAll("input");
 
-  buttonSubmit.disabled = true;
+  buttonSubmit.disabled = false;
 
   function normalizarCampos() {
     inputEmail = inputEmail.value.trim();
@@ -75,13 +75,15 @@ window.addEventListener("load", function (event) {
 
   buttonSubmit.addEventListener("click", function (e) {
     normalizarCampos();
+    window.location.href = "tarefas.html";
+    e.preventDefault();
     //Adicionar o "Se os dados existirem na base..."
-    if (validarEmail(inputEmail.value)) {
-      window.location.href = "tarefas.html";
-      e.preventDefault();
-    } else {
-      console.log("Este email é inválido");
-    }
+    // if (validarEmail(inputEmail.value)) {
+    //   window.location.href = "tarefas.html";
+    //   e.preventDefault();
+    // } else {
+    //   console.log("Este email é inválido");
+    // }
   });
 
   event.preventDefault();
