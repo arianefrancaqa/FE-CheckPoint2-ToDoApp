@@ -17,12 +17,7 @@ function getJwt() {
   return token;
 }
 
-//Envio POST Tasks
-let postTaskBody = {
-  description: "Terminar Checkpoint",
-  completed: "false",
-};
-
+//Tranformando a data
 function transformaData() {
   let data = new Date();
   let ano = data.getFullYear();
@@ -32,10 +27,10 @@ function transformaData() {
 
   return `Criada em: ${dataFormatada}`;
 }
-
+//Fetch POST Tasks
 function postTask(nomeTarefa) {
   let taskBody = {
-    description: nomeTarefa,
+    description: inputNomeTarefa.value,
     completed: "false",
   };
 
@@ -91,8 +86,38 @@ function taskCreator(taskName) {
   divTarefa.appendChild(liTarefa);
 }
 
-window.addEventListener("load", function (e) {
-  //taskCreator("Terminar Checkpoint");
-  postTask("teste");
-  e.preventDefault();
+function waitForElm(selector) {
+  return new Promise(resolve => {
+      if (document.querySelector(selector)) {
+          return resolve(document.querySelector(selector));
+      }
+
+      const observer = new MutationObserver(mutations => {
+          if (document.querySelector(selector)) {
+              resolve(document.querySelector(selector));
+              observer.disconnect();
+          }
+      });
+
+      observer.observe(document.body, {
+          childList: true,
+          subtree: true
+      });
+  });
+}
+
+window.addEventListener("load", function (event) {
+  buttonSubmit.addEventListener("click", function (e) {
+    postTask();
+
+    waitForElm('.tarefa').then((elm) => {
+      console.log('Element is ready');
+      console.log(elm.textContent);
+      inputNomeTarefa.value = "";
+  });
+
+    e.preventDefault();
+  });
+
+  event.preventDefault();
 });
