@@ -2,15 +2,16 @@ import { login, baseUrl } from "./login.js";
 let divTarefa = document.getElementById("divTarefa");
 let inputNomeTarefa = document.getElementById("novaTarefa");
 let buttonSubmit = document.getElementById("submit");
-// let inputDescricao = document.getElementById("descricaoPost");
-// let inputUrl = document.getElementById("urlImagemPost");
-// let buttonSubmit = document.getElementById("submitButton");
-// let form = document.querySelector("form");
+let buttonCloseApp = document.getElementById("closeApp");
 
 let token;
 
+//TODO Colocar Nome do Usuário e colocar dentro do .user-info p
+
+//TODO Pegar os valores passados no login de email e senha e
+//passar dinamicamente na função getJwt()
 function getJwt() {
-  login("denise@gmail.com", "de123");
+  login("asasasas@mail.com", "asaasd");
 
   token = localStorage.getItem("token");
   console.log(`Retorno do getJwt(): ${token}`);
@@ -44,7 +45,7 @@ function postTask(nomeTarefa) {
   })
     .then((response) => {
       if (response.status === 201) {
-        console.log("Successfull login");
+        console.log("Successfull post task");
         return response.json();
       }
     })
@@ -54,6 +55,32 @@ function postTask(nomeTarefa) {
     })
     .then((task) => {
       taskCreator(task.description);
+    })
+    .catch((err) => console.log(err));
+}
+
+function getTask() {
+  fetch(`${baseUrl}/v1/tasks`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      authorization: getJwt(),
+    },
+  })
+    .then((response) => {
+      if (response.status === 200) {
+        console.log("Successfull Get Task");
+        return response.json();
+      }
+    })
+    .then((data) => {
+      console.log(data);
+      return data;
+    })
+    .then((tasks) => {
+      tasks.forEach((task) => {
+        taskCreator(task.description);
+      });
     })
     .catch((err) => console.log(err));
 }
@@ -76,8 +103,13 @@ function taskCreator(taskName) {
   timeStamp.setAttribute("class", "timeStamp");
   timeStamp.innerHTML = transformaData();
 
+  let deleteTask = document.createElement("button");
+  deleteTask.setAttribute("class", "delete-task-button");
+  deleteTask.innerHTML = "Deletar Tarefa"
+
   descricao.appendChild(nomeTarefa);
   descricao.appendChild(timeStamp);
+  descricao.appendChild(deleteTask);
 
   liTarefa.appendChild(notDoneDiv);
   liTarefa.appendChild(descricao);
@@ -87,37 +119,43 @@ function taskCreator(taskName) {
 }
 
 function waitForElm(selector) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
+    if (document.querySelector(selector)) {
+      return resolve(document.querySelector(selector));
+    }
+
+    const observer = new MutationObserver((mutations) => {
       if (document.querySelector(selector)) {
-          return resolve(document.querySelector(selector));
+        resolve(document.querySelector(selector));
+        observer.disconnect();
       }
+    });
 
-      const observer = new MutationObserver(mutations => {
-          if (document.querySelector(selector)) {
-              resolve(document.querySelector(selector));
-              observer.disconnect();
-          }
-      });
-
-      observer.observe(document.body, {
-          childList: true,
-          subtree: true
-      });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
   });
 }
 
 window.addEventListener("load", function (event) {
+  getTask();
   buttonSubmit.addEventListener("click", function (e) {
     postTask();
 
-    waitForElm('.tarefa').then((elm) => {
-      console.log('Element is ready');
+    waitForElm(".tarefa").then((elm) => {
+      console.log("Element is ready");
       console.log(elm.textContent);
       inputNomeTarefa.value = "";
-  });
-
+    });
     e.preventDefault();
   });
+
+  buttonCloseApp.addEventListener("click", function (ev) {
+    window.location.href = "login.html";
+    ev.preventDefault();
+  });
+
 
   event.preventDefault();
 });

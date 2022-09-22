@@ -20,9 +20,7 @@ async function login(emailEntry, passwordEntry) {
     password: passwordEntry
   };
 
-  let test
-
-  let jwt = await fetch(`${baseUrl}/v1/users/login`, {
+  await fetch(`${baseUrl}/v1/users/login`, {
     method: "POST",
     body: JSON.stringify(postBodyLogin),
     headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -34,9 +32,6 @@ async function login(emailEntry, passwordEntry) {
       }
     })
     .then((data) => {
-      // console.log(`
-      //   jwt: ${data.jwt}
-      //   `);
         let token = data.jwt
         localStorage.setItem("token", token)
       return data.jwt
