@@ -6,13 +6,15 @@ let buttonCloseApp = document.getElementById("closeApp");
 
 let token;
 
-//TODO Colocar Nome do Usuário e colocar dentro do .user-info p
+//TODO 1 Colocar Nome do Usuário e colocar dentro do .user-info p
 
-//TODO Pegar os valores passados no login de email e senha e
+//TODO 2 Pegar os valores passados no login de email e senha e
 //passar dinamicamente na função getJwt()
+
+//Todo 3 Fazer Botao de delete funcionar junto com a API
 function getJwt() {
   login("asasasas@mail.com", "asaasd");
-
+  //login("denise@gmail.com", "de123");
   token = localStorage.getItem("token");
   console.log(`Retorno do getJwt(): ${token}`);
   return token;
@@ -29,7 +31,7 @@ function transformaData() {
   return `Criada em: ${dataFormatada}`;
 }
 //Fetch POST Tasks
-function postTask(nomeTarefa) {
+function postTask() {
   let taskBody = {
     description: inputNomeTarefa.value,
     completed: "false",
@@ -116,6 +118,32 @@ function taskCreator(taskName) {
 
   divTarefa.appendChild(liTarefa);
   divTarefa.appendChild(liTarefa);
+}
+
+function deleteTask(id){
+  fetch(`${baseUrl}/v1/tasks${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      authorization: getJwt(),
+    },
+  })
+    .then((response) => {
+      if (response.status === 200) {
+        console.log("Successfull Get Task");
+        return response.json();
+      }
+    })
+    .then((data) => {
+      console.log(data);
+      return data;
+    })
+    .then((tasks) => {
+      tasks.forEach((task) => {
+        taskCreator(task.description);
+      });
+    })
+    .catch((err) => console.log(err));
 }
 
 function waitForElm(selector) {
