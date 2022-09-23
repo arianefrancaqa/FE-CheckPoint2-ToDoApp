@@ -12,46 +12,49 @@ para a nossa validacao
 https://www.simplilearn.com/tutorials/javascript-tutorial/email-validation-in-javascript
  */
 
+form = document.querySelector("form")
 
 function validate() {
+    let isValid = false
     const myForm = document.myForm
     if (myForm.inputEmail.value == "") {
         alert("Forneça um endereço de email")
         document.myForm.inputEmail.focus()
-        return false
-    } else if(myForm.inputPassword.value == ""){
+    } else if (myForm.inputPassword.value == ""){
         alert("Forneça a sua senha")  
         document.myForm.inputPassword.focus()
-        return false
     } else if (myForm.inputPasswordRepetir.value !== myForm.inputPassword.value){
         alert("Senhas não compatíveis")
-        return false 
-
+    } else if (myForm.inputNome.value == "") {
+        alert("Forneça um nome")
+        document.myForm.inputNome.focus()
+    } else if (myForm.inputSobrenome.value == ""){
+        alert("Forneça um sobrenome")
+        document.myForm.inputNome.focus()
     } else {
-        return true
+        isValid = true
     }
+
+    return isValid
 }
 
 function emailValidation() {
     let mail = document.getElementById("inputEmail").value;
-    var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    let validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    
     if(!validRegex.test(mail)) {
         alert("Email inválido")
         return false
     }
 }
 
-
-form = document.querySelector("form")
-
-form.addEventListener("submit", (evento) => {
+form.addEventListener("submit", async (evento) => {
     evento.preventDefault()
 
     // Validar se todos os campos foram preenchidos
     document.getElementById("btn").disabled = true
     validate()
     
-    // let listOfInputs = document.querySelectorAll("input")
     // for (let index = 0; index < listOfInputs.length; index++) {
     //     const input = listOfInputs[index];
     //   if(input.value === null || input.value === "") {
@@ -68,16 +71,33 @@ form.addEventListener("submit", (evento) => {
     let email = document.getElementById("inputEmail").value;
     let password = document.getElementById("inputPassword").value;
     
-    console.log(email, password)
+    // Chamar a API /v1/users POST para criar um usuario
+    // e receber o token JWT de acesso
+
+    // Descomentar linha 78 e remover linha 79 quando a API voltar a funcionar
+    //const jwt = await signup(nome, sobrenome, email, password)
+    const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbmlzZUBnbWFpbC5jb20iLCJpZCI6NzA1MSwiaWF0IjoxNjYzODg0MzI4fQ.fUZAtE42hVZJYoYqLEIqUt9xg62eSBd3Yn-vfFnoiH4'
     
-    // Chamar a API /users POST para criar um usuario
-    const jwt = signup(nome, sobrenome, email, password)
     console.log(`jwt received: ${jwt}`);
-    // Redirecionar para a pagina de login
-    // window.location.href = "tarefas.html";
+
+    // Salvar JWT no localstorage para extrair na pagina tasks.html
+    localStorage.setItem('jwt_ctd', jwt)
+    const valorJwtLocalstorage = localStorage.getItem('jwt_ctd')
+
+    console.log(`JWT armazenado no localstorage ${valorJwtLocalstorage}`)
+    
+    alert('Cadastro efetuado com sucesso')
+
+    // Caso for usar modal, usar o setTimeout para dar um tempo
+    // para o usuario ler o modal e depois ser redirecionado
+    // setTimeout(()=>{
+    //     console.log('aguardando redirecionamento...')
+    // }, 5000)
+
+    // Redirecionar para a pagina de tarefas
+    window.location.href = "tarefas.html";
     // return 
 })
-
 
 function normalizarCampos(){
     let listOfInputs = document.querySelectorAll("input")
@@ -86,50 +106,4 @@ function normalizarCampos(){
         listOfInputs = input.value.trim();     
     }
     return normalizarCampos;
-}
-
-/*
-        let conteudo = input.value
-        if (conteudo !== null && conteudo !== ''){
-            document.getElementById("btn").disabled = false
-        } else {
-            document.getElementById("btn").disabled = true
-        }
-
-let listOfInputs = document.querySelectorAll("input")
-    for (let index = 0; index < listOfInputs.length; index++) {
-        const input = listOfInputs[index];
-        input.addEventListener("blur", function(event) {
-            event.target.style.background = ''
-        }, true)
-      
-    }
-         */
-function signup(nome, sobrenome, email, password) {
-    console.log(nome, sobrenome, email, password)
-    
-    const baseUrl = "https://ctd-todo-api.herokuapp.com";
-    let postBodyLogin = {
-        firstName: nome,
-        lastName: sobrenome,
-        email: email,
-        password: password
-    };
-      
-    fetch(`${baseUrl}/v1/users`, {
-        method: "POST",
-        body: JSON.stringify(postBodyLogin),
-        headers: { 
-            "Content-type": "application/json; charset=UTF-8" 
-        },
-    })
-    .then((response) => {
-        if (response.status === 201) {
-            return response.json()
-        }
-    })
-    .then((data) => {
-        return data.jwt
-    })
-    .catch((err) => console.log(err));
 }
