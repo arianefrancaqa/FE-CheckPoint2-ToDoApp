@@ -203,6 +203,10 @@ async function updateTask(id, description) {
   const listaDeTarefasPendentes = document.getElementById("tarefas-pendentes")
   const listaDeTarefasTerminadas = document.getElementById("tarefas-terminadas")
   const liElement = document.getElementById(id)
+  const descricaoDiv = liElement.querySelector('.descricao')
+  const updateTaskChildButton = descricaoDiv.querySelector('.update-task-button')
+
+  descricaoDiv.removeChild(updateTaskChildButton)
   
   listaDeTarefasPendentes.removeChild(liElement)
   listaDeTarefasTerminadas.appendChild(liElement)
