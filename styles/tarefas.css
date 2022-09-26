@@ -195,7 +195,7 @@ a {
 .update-task-button{
   margin-left: 15px;
   font-size: .7em;
-  background-color: yellow;
+  background-color: rgb(125, 109, 207);
   color: white;
   border-radius: 50vh;
   padding: 5px 10px;
