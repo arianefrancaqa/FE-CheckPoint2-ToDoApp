@@ -1,7 +1,8 @@
 import { baseUrl } from "./constants.js";
 import { getJwt, getMe } from "./auth.js"
 
-let ulTarefa = document.getElementById("tarefas-pendentes");
+let ulTarefasPendentes = document.getElementById("tarefas-pendentes");
+let ulTarefasTerminadas = document.getElementById("tarefas-terminadas");
 let inputNomeTarefa = document.getElementById("novaTarefa");
 let buttonSubmit = document.getElementById("submit");
 let buttonCloseApp = document.getElementById("closeApp");
@@ -42,16 +43,8 @@ async function postTask() {
     console.log("Successfull post task");
   }
 
-  // TODO: descomentar linha 51 e comentar linha 52-58 quando a API
-  // voltar a funcionar
-  // const task = await response.json()
-  const task = {
-    id: 5000,
-    createdAt: new Date().toISOString(),
-    pendente: false,
-    description: 'tarefa',
-    userId: '1'
-  }
+   const task = await response.json()
+ 
   await createTaskDOM(task);
 }
 
@@ -69,11 +62,14 @@ async function getTasks() {
 
   if (response.status !== 200) {
     alert('Deu problema ao carregar as tasks')
+    return false
   }
-  
-  console.log("Successfull Get Task");
-  
+
   const tasks = await response.json()
+
+  // remove os itens das duas listas 
+  ulTarefasPendentes.innerHTML = ""
+  ulTarefasTerminadas.innerHTML = ""
 
   // Ordena as tasks por data de forma ascendente
   // Corrigir o codigo abaixo para fazer a ordenacao funcionar
@@ -88,16 +84,6 @@ async function getTasks() {
   tasks.forEach(async (task) => {
     await createTaskDOM(task);
   });
-
-  // TODO: remover o codigo abaixo quando a API for corrigida
-  const task = {
-    id: 5000,
-    createdAt: new Date().toISOString(),
-    pendente: false,
-    description: 'tarefa',
-    userId: '1'
-  }
-  await createTaskDOM(task)
 
 }
 
@@ -148,8 +134,11 @@ async function createTaskDOM(task) {
   liTarefa.appendChild(notDoneDiv);
   liTarefa.appendChild(descricao);
 
-  ulTarefa.appendChild(liTarefa);
-  ulTarefa.appendChild(liTarefa);
+  if (task.completed) {
+    ulTarefasTerminadas.appendChild(liTarefa)
+  } else {
+    ulTarefasPendentes.appendChild(liTarefa);
+  }
 }
 
 /**
@@ -167,11 +156,10 @@ async function deleteTask(id) {
   })
 
   if (response.status === 200) {
-    // Remove a tarefa do DOM
-    const listaDeTarefas = document.getElementById("tarefas-pendentes")
-    const liElement = document.getElementById(id)
-    listaDeTarefas.removeChild(liElement)
-  } else {
+    // após remover no servidor, renderizamos todas as tasks novamente
+    await getTasks();
+  }
+  else {
     alert('Ocorreu um erro ao deletar a tarefa')
   }
 }
