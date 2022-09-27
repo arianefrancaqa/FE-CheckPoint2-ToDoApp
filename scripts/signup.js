@@ -59,10 +59,8 @@ form.addEventListener("submit", async (evento) => {
         // Chamar a API /v1/users POST para criar um usuario
         // e receber o token JWT de acesso
 
-        // Descomentar linha 78 e remover linha 79 quando a API voltar a funcionar
         const jwt = await signup(nome, sobrenome, email, password)
-        // const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbmlzZUBnbWFpbC5jb20iLCJpZCI6NzA1MSwiaWF0IjoxNjYzODg0MzI4fQ.fUZAtE42hVZJYoYqLEIqUt9xg62eSBd3Yn-vfFnoiH4'
-
+       
         console.log(`jwt received: ${jwt}`);
 
         // Salvar JWT no localstorage para extrair na pagina tasks.html
