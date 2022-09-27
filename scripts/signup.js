@@ -12,7 +12,15 @@ para a nossa validacao
 https://www.simplilearn.com/tutorials/javascript-tutorial/email-validation-in-javascript
  */
 
-form = document.querySelector("form")
+import { signup } from './auth.js'
+
+let senha = document.getElementById("inputPassword");
+let repeteSenha = document.getElementById("inputPassword");
+
+//inputPasswordRepetir
+
+
+let form = document.querySelector("form")
 
 function validate() {
     let isValid = false
@@ -48,12 +56,30 @@ function emailValidation() {
     }
 }
 
+function validaSenhasCoincidem(){
+
+}
+
 form.addEventListener("submit", async (evento) => {
     evento.preventDefault()
 
     // Validar se todos os campos foram preenchidos
-    document.getElementById("btn").disabled = true
-    validate()
+    //document.getElementById("btn").disabled = true
+
+    let isValid = validate()
+    console.log(`Is valid: ${isValid}`)
+
+    // if(validate() === false){
+    //     document.getElementById("btn").disabled = true
+    //     validate()
+    //     evento.preventDefault()
+    // }
+    if (isValid) {
+        
+    
+    
+    //    document.getElementById("btn").disabled = false
+    
     
     // for (let index = 0; index < listOfInputs.length; index++) {
     //     const input = listOfInputs[index];
@@ -63,7 +89,7 @@ form.addEventListener("submit", async (evento) => {
     //     return 
     //   }
     // }  
-    document.getElementById("btn").disabled = false
+    
 
     // Extrair valores dos campos
     let nome = document.getElementById("inputNome").value;
@@ -75,8 +101,8 @@ form.addEventListener("submit", async (evento) => {
     // e receber o token JWT de acesso
 
     // Descomentar linha 78 e remover linha 79 quando a API voltar a funcionar
-    //const jwt = await signup(nome, sobrenome, email, password)
-    const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbmlzZUBnbWFpbC5jb20iLCJpZCI6NzA1MSwiaWF0IjoxNjYzODg0MzI4fQ.fUZAtE42hVZJYoYqLEIqUt9xg62eSBd3Yn-vfFnoiH4'
+    const jwt = await signup(nome, sobrenome, email, password)
+    // const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbmlzZUBnbWFpbC5jb20iLCJpZCI6NzA1MSwiaWF0IjoxNjYzODg0MzI4fQ.fUZAtE42hVZJYoYqLEIqUt9xg62eSBd3Yn-vfFnoiH4'
     
     console.log(`jwt received: ${jwt}`);
 
@@ -97,6 +123,7 @@ form.addEventListener("submit", async (evento) => {
     // Redirecionar para a pagina de tarefas
     window.location.href = "tarefas.html";
     // return 
+    }
 })
 
 function normalizarCampos(){

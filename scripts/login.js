@@ -39,7 +39,7 @@ window.addEventListener("load", function (event) {
     normalizarCampos(inputEmail, inputPassword);
 
     const jwt = await login(inputEmail.value, inputPassword.value)
-    
+    console.log(`JWT: ${jwt}`)
     if (jwt === undefined) {
       alert('Credenciais invalidas. tente novamente')
       return
