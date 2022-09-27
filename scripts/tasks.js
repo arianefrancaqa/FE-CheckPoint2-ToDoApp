@@ -43,8 +43,8 @@ async function postTask() {
     console.log("Successfull post task");
   }
 
-   const task = await response.json()
- 
+  const task = await response.json()
+
   await createTaskDOM(task);
 }
 
@@ -145,7 +145,7 @@ async function createTaskDOM(task) {
  * Deleta uma task do usuario e atualiza a lista de tasks no DOM
  */
 async function deleteTask(id) {
-  
+
   // Remove a tarefa do servidor
   const response = await fetch(`${baseUrl}/v1/tasks/${id}`, {
     method: "DELETE",
@@ -195,7 +195,7 @@ async function updateTask(id, description) {
   const updateTaskChildButton = descricaoDiv.querySelector('.update-task-button')
 
   descricaoDiv.removeChild(updateTaskChildButton)
-  
+
   listaDeTarefasPendentes.removeChild(liElement)
   listaDeTarefasTerminadas.appendChild(liElement)
 }
@@ -248,7 +248,7 @@ async function getUserData() {
 async function setUserProfileImage() {
   const divProfile = document.querySelector('.user-image')
   const imgNode = document.createElement('img')
-  imgNode.setAttribute('src','https://picsum.photos/200')
+  imgNode.setAttribute('src', 'https://picsum.photos/200')
   divProfile.appendChild(imgNode)
 }
 
@@ -273,11 +273,11 @@ window.addEventListener("load", async function (event) {
   // ou deu um erro no servidor ou o token eh invalido. Entao devemos redirecionar
   // o usuario para a pagina de login
   const userData = await getUserData()
-  
+
   populateHeader(userData)
-  
+
   await getTasks();
-  
+
   // Event Listener que captura o click do botao +
   // e adiciona uma tarefa a lista de tarefas pendentes
   buttonSubmit.addEventListener("click", async function (e) {
