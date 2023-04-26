@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ----------------------------- style CSS ----------------------------- -->
+    <link rel="stylesheet" href="./styles/tarefas.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- ------------------- Lib - Fontawesome -------------------- -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- ----------------------------- sweet alert ----------------------------- -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- CDN example (unpkg) -->
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+
+    <title>A11y Test Report</title>
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a id=title href="#">A11y Tests Reports</a>
+        </nav>
+    </header>
+
+    <div class="sp-violations">
+        <h2>Replace with SP name</h2>
+        <div id="report-info">
+            Test
+        </div>
+        <ul class="violations-data" id="violations-data">
+            
+        </ul>
+    </div>
+
+    <script type="module" src="scripts/generateReportNew.js"></script>
+    <!-- <script type="text/typescript" src="/scripts/generateReport.ts"></script>
+    <script type="text/javascript" src="typescript.min.js"></script>
+    <script type="text/javascript" src="typescript.compile.min.js"></script> -->
+</body>
+
+</html>

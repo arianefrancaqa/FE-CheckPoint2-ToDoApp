@@ -1,0 +1,84 @@
+[
+    {
+        "description": "Ensures <img> elements have alternate text or a role of none or presentation",
+        "nodes": [
+            {
+                "help": "Images must have alternate text",
+                "helpUrl": "https://dequeuniversity.com/rules/axe/4.6/image-alt?application=playwright",
+                "html": "<img src=\"data:image/svg+xml;base64\">",
+                "impact": "critical"
+            }
+        ]
+    },
+    {
+        "description": "Ensures links have discernible text",
+        "nodes": [
+            {
+                "help": "Links must have discernible text",
+                "helpUrl": "https://dequeuniversity.com/rules/axe/4.6/link-name?application=playwright",
+                "html": "<a href=\"https://uberall.store/qa-websites/Automation/TestSF2/#!\" class=\"ubsf_brand\"></a>",
+                "impact": "serious"
+            },
+            {
+                "help": "Links must have discernible text",
+                "helpUrl": "https://dequeuniversity.com/rules/axe/4.6/link-name?application=playwright",
+                "html": "<a href=\"https://uberall.store/qa-websites/Automation/TestSF2/#!/l/berlin/hussitenstrasse-33/3749440\" id=\"\" class=\"ubsf_locations-list-item-main-content-link\"></a>",
+                "impact": "serious"
+            },
+            {
+                "help": "Links must have discernible text",
+                "helpUrl": "https://dequeuniversity.com/rules/axe/4.6/link-name?application=playwright",
+                "html": "<a href=\"https://uberall.store/qa-websites/Automation/TestSF2/#!/l/berlin/hussitenstrasse-32/3749442\" id=\"\" class=\"ubsf_locations-list-item-main-content-link\"></a>",
+                "impact": "serious"
+            },
+            {
+                "help": "Links must have discernible text",
+                "helpUrl": "https://dequeuniversity.com/rules/axe/4.6/link-name?application=playwright",
+                "html": "<a href=\"https://uberall.store/qa-websites/Automation/TestSF2/#!/l/berlin/kopenhagener-strasse-37/3749439\" id=\"\" class=\"ubsf_locations-list-item-main-content-link\"></a>",
+                "impact": "serious"
+            },
+            {
+                "help": "Links must have discernible text",
+                "helpUrl": "https://dequeuniversity.com/rules/axe/4.6/link-name?application=playwright",
+                "html": "<a href=\"https://uberall.store/qa-websites/Automation/TestSF2/#!/l/munchen/hohenzollernstrasse-152/3749438\" id=\"\" class=\"ubsf_locations-list-item-main-content-link\"></a>",
+                "impact": "serious"
+            },
+            {
+                "help": "Links must have discernible text",
+                "helpUrl": "https://dequeuniversity.com/rules/axe/4.6/link-name?application=playwright",
+                "html": "<a href=\"https://uberall.store/qa-websites/Automation/TestSF2/#!/l/den-haag/van-stolkweg-1/3749437\" id=\"\" class=\"ubsf_locations-list-item-main-content-link\"></a>",
+                "impact": "serious"
+            },
+            {
+                "help": "Links must have discernible text",
+                "helpUrl": "https://dequeuniversity.com/rules/axe/4.6/link-name?application=playwright",
+                "html": "<a href=\"https://uberall.store/qa-websites/Automation/TestSF2/#!/l/los-angeles/3470-s-sepulveda-blvd/3749441\" id=\"\" class=\"ubsf_locations-list-item-main-content-link\"></a>",
+                "impact": "serious"
+            },
+            {
+                "help": "Links must have discernible text",
+                "helpUrl": "https://dequeuniversity.com/rules/axe/4.6/link-name?application=playwright",
+                "html": "<a href=\"https://uberall.store/qa-websites/Automation/TestSF2/#!/l/berlin/hussitenstrasse-33/1837556\" id=\"\" class=\"ubsf_locations-list-item-main-content-link\"></a>",
+                "impact": "serious"
+            },
+            {
+                "help": "Links must have discernible text",
+                "helpUrl": "https://dequeuniversity.com/rules/axe/4.6/link-name?application=playwright",
+                "html": "<a href=\"https://uberall.store/qa-websites/Automation/TestSF2/#!/l/berlin/hussitenstrasse-33/1837557\" id=\"\" class=\"ubsf_locations-list-item-main-content-link\"></a>",
+                "impact": "serious"
+            },
+            {
+                "help": "Links must have discernible text",
+                "helpUrl": "https://dequeuniversity.com/rules/axe/4.6/link-name?application=playwright",
+                "html": "<a href=\"https://uberall.store/qa-websites/Automation/TestSF2/#!/l/berlin/hussitenstrasse-33/3492329\" id=\"\" class=\"ubsf_locations-list-item-main-content-link\"></a>",
+                "impact": "serious"
+            },
+            {
+                "help": "Links must have discernible text",
+                "helpUrl": "https://dequeuniversity.com/rules/axe/4.6/link-name?application=playwright",
+                "html": "<a href=\"https://uberall.store/qa-websites/Automation/TestSF2/#!/l/berlin/hussitenstrasse-33/3695997\" id=\"\" class=\"ubsf_locations-list-item-main-content-link\"></a>",
+                "impact": "serious"
+            }
+        ]
+    }
+]
